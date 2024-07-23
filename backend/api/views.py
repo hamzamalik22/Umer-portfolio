@@ -14,6 +14,7 @@ from .models import *
 def getRoutes(request, format=None):
     routes = [
         {"GET, PUT & DELETE": "/api/profile/"},
+        {"GET, PUT & DELETE": "/api/about/"},
         {"POST": "/api/users/token/"},
         {"POST": "/api/users/token/refresh/"},
         {"POST & GET": "/api/agents"},
@@ -28,7 +29,7 @@ def getRoutes(request, format=None):
     return Response({"Routes": routes})
 
 
-@api_view(["GET", "PUT", "DELETE"])
+@api_view(["GET"])
 def theProfile(request):
     try:
         profile = Profile.objects.get()
@@ -43,13 +44,18 @@ def theProfile(request):
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
 
-    elif request.method == "PUT":
-        serializer = ProfileSerializer(profile, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == "DELETE":
-        profile.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+@api_view(["GET"])
+def theAbout(request):
+    try:
+        about = About.objects.get()
+    except About.DoesNotExist:
+        if request.method == "GET":
+            return Response(
+                {"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+        about = None
+
+    if request.method == "GET":
+        serializer = AboutSerializer(about)
+        return Response(serializer.data)

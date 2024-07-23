@@ -30,6 +30,9 @@ class About(models.Model):
     service_3_description = models.TextField(null=True)
     service_4_title = models.CharField(max_length=200, null=True)
     service_4_description = models.TextField(null=True)
+    
+    def __str__(self):
+        return 'About Section Data'
 
 
 class Testimonial(models.Model):
