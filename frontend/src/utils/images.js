@@ -31,6 +31,7 @@ import project_6 from "../images/project-6.png";
 import project_7 from "../images/project-7.png";
 import project_8 from "../images/project-8.jpg";
 import project_9 from "../images/project-9.png";
+import bg_electronic from "../images/bg_electronic.jpg";
 
 const imgs = {
   avatar_1,
@@ -66,6 +67,7 @@ const imgs = {
   project_7,
   project_8,
   project_9,
+  bg_electronic,
 };
 
 export default imgs;
