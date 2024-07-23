@@ -1,9 +1,30 @@
 import React, { useEffect, useRef } from "react";
 import imgs from "../utils/images";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "../store/actions/ProfileActions";
 
 const Sidebar = () => {
   const sidebarRef = useRef(null);
   const sidebarBtnRef = useRef(null);
+  const dispatch = useDispatch();
+  const { list, loading, error } = useSelector((state) => state.profile);
+
+  const {
+    name,
+    job_title,
+    email,
+    phone,
+    date_of_birth,
+    city,
+    province,
+    country,
+    linkedin,
+    instagram,
+  } = list;
+
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
   const toggleClass = (elem) => {
     elem.classList.toggle("active");
@@ -27,6 +48,9 @@ const Sidebar = () => {
     };
   }, []);
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <aside className="sidebar" data-sidebar ref={sidebarRef}>
       <div className="sidebar-info">
@@ -35,11 +59,11 @@ const Sidebar = () => {
         </figure>
 
         <div className="info-content">
-          <h1 className="name" title="Richard hanrick">
-            Richard hanrick
+          <h1 className="name" title={name}>
+            {name}
           </h1>
 
-          <p className="title">Web developer</p>
+          <p className="title">{job_title}</p>
         </div>
 
         <button className="info_more-btn" data-sidebar-btn ref={sidebarBtnRef}>
@@ -58,8 +82,8 @@ const Sidebar = () => {
             </div>
             <div className="contact-info">
               <p className="contact-title">Email</p>
-              <a href="mailto:richard@example.com" className="contact-link">
-                richard@example.com
+              <a href={`mailto:${email}`} className="contact-link">
+                {email}
               </a>
             </div>
           </li>
@@ -69,8 +93,8 @@ const Sidebar = () => {
             </div>
             <div className="contact-info">
               <p className="contact-title">Phone</p>
-              <a href="tel:+12133522795" className="contact-link">
-                +1 (213) 352-2795
+              <a href={`tel:${phone}`} className="contact-link">
+                {phone}
               </a>
             </div>
           </li>
@@ -80,7 +104,7 @@ const Sidebar = () => {
             </div>
             <div className="contact-info">
               <p className="contact-title">Birthday</p>
-              <time dateTime="1982-06-23">June 23, 1982</time>
+              <time>{date_of_birth}</time>
             </div>
           </li>
           <li className="contact-item">
@@ -89,7 +113,9 @@ const Sidebar = () => {
             </div>
             <div className="contact-info">
               <p className="contact-title">Location</p>
-              <address>Sacramento, California, USA</address>
+              <address>
+                {city}, {province}, {country}
+              </address>
             </div>
           </li>
         </ul>
@@ -98,17 +124,12 @@ const Sidebar = () => {
 
         <ul className="social-list">
           <li className="social-item">
-            <a href="#" className="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
+            <a target="_blank" href={linkedin} className="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
           <li className="social-item">
-            <a href="#" className="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-          <li className="social-item">
-            <a href="#" className="social-link">
+            <a target="_blank" href={instagram} className="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>

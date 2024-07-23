@@ -8,8 +8,11 @@ class Profile(models.Model):
     email = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
+    province = models.CharField(max_length=200, null=True)
     country = models.CharField(max_length=200, null=True)
     date_of_birth = models.CharField(max_length=200, null=True)
+    linkedin = models.CharField(max_length=200, null=True)
+    instagram = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
