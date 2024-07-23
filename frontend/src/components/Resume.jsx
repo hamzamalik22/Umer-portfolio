@@ -1,6 +1,7 @@
 import React from "react";
 
 const Resume = () => {
+  
   return (
     <>
       <article className="resume active">
