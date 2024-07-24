@@ -86,3 +86,21 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=200, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=200, null=True)
+    featured_image = models.ImageField(null=True, blank=True, default="default.jpg")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.title

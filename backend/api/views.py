@@ -19,6 +19,8 @@ def getRoutes(request, format=None):
         {"GET": "/api/education/"},
         {"GET": "/api/experience/"},
         {"GET": "/api/skill/"},
+        {"GET": "/api/project/"},
+        {"GET": "/api/category/"},
     ]
     return Response({"Routes": routes})
 
@@ -85,3 +87,19 @@ def theSkill(request, format=None):
         skill = Skill.objects.all()
         serializer = SkillSerializer(skill, many=True)
         return Response({"Skill": serializer.data})
+
+
+@api_view(["GET"])
+def theCategory(request, format=None):
+    if request.method == "GET":
+        category = Category.objects.all()
+        serializer = CategorySerializer(category, many=True)
+        return Response({"Category": serializer.data})
+
+
+@api_view(["GET"])
+def theProject(request, format=None):
+    if request.method == "GET":
+        project = Project.objects.all()
+        serializer = ProjectSerializer(project, many=True)
+        return Response({"Project": serializer.data})

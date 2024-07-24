@@ -2135,7 +2135,7 @@ textarea.form-input::-webkit-resizer {
 
 .bg-electronic {
     /* background-image: url('../images/bg_electronic.jpg'); */
-    background-image: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTk3Ym9xY2tjc3Ryd2RjNXJyaHcxbW1lOWlleTV6YTl1dzg2N2t4aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9KU2KmTwzptMD6/giphy.webp'); /* Ensure the correct path */
+    /* background-image: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTk3Ym9xY2tjc3Ryd2RjNXJyaHcxbW1lOWlleTV6YTl1dzg2N2t4aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9KU2KmTwzptMD6/giphy.webp');  */
     background-size: cover;
     background-position: center;
   }
