@@ -49,6 +49,7 @@ class Testimonial(models.Model):
 
 
 class Education(models.Model):
+    order = models.PositiveIntegerField(default=0, null=True)
     school_name = models.CharField(max_length=200, null=True)
     start_year = models.IntegerField(null=True)
     end_year = models.IntegerField(null=True)
@@ -56,24 +57,31 @@ class Education(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.school_name
+
+    class Meta:
+        ordering = ["order", "start_year"]
 
 
 class Experience(models.Model):
+    order = models.PositiveIntegerField(default=0, null=True)
     company_name = models.CharField(max_length=200, null=True)
+    job_title = models.CharField(max_length=200, null=True)
     start_year = models.IntegerField(null=True)
     end_year = models.CharField(max_length=200, null=True, default="Present")
     description = models.TextField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.company_name
+
+    class Meta:
+        ordering = ["order", "start_year"]
 
 
 class Skill(models.Model):
     name = models.CharField(max_length=200, null=True)
     level_in_percent = models.IntegerField(null=True)
-    end_year = models.IntegerField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

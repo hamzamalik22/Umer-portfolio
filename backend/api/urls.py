@@ -15,5 +15,8 @@ urlpatterns = [
     path("profile/", views.theProfile, name="profile"),
     path("about/", views.theAbout, name="about"),
     path("testimonials/", views.theTestimonials, name="testimonials"),
+    path("education/", views.theEducation, name="education"),
+    path("experience/", views.theExperience, name="experience"),
+    path("skill/", views.theSkill, name="skill"),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

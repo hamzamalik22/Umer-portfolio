@@ -11,16 +11,16 @@ const TestimonialSlice = createSlice({
   reducers: {
     // Fetch customers actions
     getTestimonialStart: (state) => {
-      state.loading = true;
-      state.error = null;
+      state.testLoading = true;
+      state.testError = null;
     },
     getTestimonialSuccess: (state, action) => {
       state.testList = action.payload;
-      state.loading = false;
+      state.testLoading = false;
     },
     getTestimonialFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.testLoading = false;
+      state.testError = action.payload;
     },
   },
 });

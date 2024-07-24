@@ -13,19 +13,12 @@ from .models import *
 @api_view(["GET"])
 def getRoutes(request, format=None):
     routes = [
-        {"GET, PUT & DELETE": "/api/profile/"},
-        {"GET, PUT & DELETE": "/api/about/"},
+        {"GET": "/api/profile/"},
+        {"GET": "/api/about/"},
         {"GET": "/api/testimonials/"},
-        {"POST": "/api/users/token/"},
-        {"POST": "/api/users/token/refresh/"},
-        {"POST & GET": "/api/agents"},
-        {"POST,GET,PUT & DELETE": "/api/agents/id/"},
-        {"POST & GET": "/api/customers/"},
-        {"POST,GET,PUT & DELETE": "/api/customers/id/"},
-        {"POST & GET": "/api/orders/"},
-        {"POST,GET,PUT & DELETE": "/api/orders/id/"},
-        {"GET": "/api/agent/role/"},
-        {"POST": "/api/update-password/"},
+        {"GET": "/api/education/"},
+        {"GET": "/api/experience/"},
+        {"GET": "/api/skill/"},
     ]
     return Response({"Routes": routes})
 
@@ -62,9 +55,33 @@ def theAbout(request):
         return Response(serializer.data)
 
 
-@api_view(["GET", "POST"])  # HTTP methods
+@api_view(["GET"])  # HTTP methods
 def theTestimonials(request, format=None):
     if request.method == "GET":  # Checking method
         tests = Testimonial.objects.all()  # Getting all the data in variable
         serializer = TestimonialSerializer(tests, many=True)  # serializing the data
         return Response({"Testimonials": serializer.data})
+
+
+@api_view(["GET"])
+def theEducation(request, format=None):
+    if request.method == "GET":
+        education = Education.objects.all()
+        serializer = EducationSerializer(education, many=True)
+        return Response({"Education": serializer.data})
+
+
+@api_view(["GET"])
+def theExperience(request, format=None):
+    if request.method == "GET":
+        experience = Experience.objects.all()
+        serializer = ExperienceSerializer(experience, many=True)
+        return Response({"Experience": serializer.data})
+
+
+@api_view(["GET"])
+def theSkill(request, format=None):
+    if request.method == "GET":
+        skill = Skill.objects.all()
+        serializer = SkillSerializer(skill, many=True)
+        return Response({"Skill": serializer.data})
