@@ -35,7 +35,7 @@ const About = () => {
   if (error) return <p>Error: {error}</p>;
 
   if (testLoading) return <p>Loading...</p>;
-  if (testError) return <p>Error: {error}</p>;
+  if (testError) return <p>Error: {testError}</p>;
 
   return (
     <>

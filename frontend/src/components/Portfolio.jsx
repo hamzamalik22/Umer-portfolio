@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import imgs from "../utils/images";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProject } from "../store/actions/ProjectActions";
 
 const Portfolio = () => {
+  const dispatch = useDispatch();
+  const { list, loading, error } = useSelector((state) => state.project);
+
+  useEffect(() => {
+    dispatch(fetchProject());
+  }, [dispatch]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <>
       <>
@@ -62,153 +74,27 @@ const Portfolio = () => {
             </div> */}
 
             <ul className="project-list">
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
+              {list.map((item, index) => (
+                <li key={index} className="project-item  active">
+                  <a href="#">
+                    <figure className="project-img">
+                      <div className="project-item-icon-box">
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </div>
 
-                    <img src={imgs.project_1} alt="finance" loading="lazy" />
-                  </figure>
+                      <img
+                        src={item.featured_image}
+                        alt={item.title}
+                        loading="lazy"
+                      />
+                    </figure>
 
-                  <h3 className="project-title">Finance</h3>
+                    <h3 className="project-title">{item.title}</h3>
 
-                  <p className="project-category">Web development</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_2} alt="orizon" loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">Orizon</h3>
-
-                  <p className="project-category">Web development</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_3} alt="fundo" loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">Fundo</h3>
-
-                  <p className="project-category">Web design</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_4} alt="brawlhalla" loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">Brawlhalla</h3>
-
-                  <p className="project-category">Applications</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_5} alt="dsm." loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">DSM.</h3>
-
-                  <p className="project-category">Web design</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_6} alt="metaspark" loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">MetaSpark</h3>
-
-                  <p className="project-category">Web design</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_7} alt="summary" loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">Summary</h3>
-
-                  <p className="project-category">Web development</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img
-                      src={imgs.project_8}
-                      alt="task manager"
-                      loading="lazy"
-                    />
-                  </figure>
-
-                  <h3 className="project-title">Task Manager</h3>
-
-                  <p className="project-category">Applications</p>
-                </a>
-              </li>
-
-              <li className="project-item  active">
-                <a href="#">
-                  <figure className="project-img">
-                    <div className="project-item-icon-box">
-                      <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-
-                    <img src={imgs.project_9} alt="arrival" loading="lazy" />
-                  </figure>
-
-                  <h3 className="project-title">Arrival</h3>
-
-                  <p className="project-category">Web development</p>
-                </a>
-              </li>
+                    <p className="project-category">{item.category.title}</p>
+                  </a>
+                </li>
+              ))}
             </ul>
           </section>
         </article>

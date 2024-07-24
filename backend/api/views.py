@@ -101,5 +101,5 @@ def theCategory(request, format=None):
 def theProject(request, format=None):
     if request.method == "GET":
         project = Project.objects.all()
-        serializer = ProjectSerializer(project, many=True)
+        serializer = ProjectSerializer(project, many=True, context={'request': request})
         return Response({"Project": serializer.data})

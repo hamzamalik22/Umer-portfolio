@@ -5,6 +5,7 @@ import TestimonialReducer from "./reducers/TestimonialSlice";
 import EducationReducer from "./reducers/EducationSlice";
 import ExperienceReducer from "./reducers/ExperienceSlice";
 import SkillReducer from "./reducers/SkillSlice";
+import ProjectReducer from "./reducers/ProjectSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     education: EducationReducer,
     experience: ExperienceReducer,
     skill: SkillReducer,
+    project: ProjectReducer,
   },
 });

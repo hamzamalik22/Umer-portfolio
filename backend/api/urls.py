@@ -1,9 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from django.conf import settings  # this
-from django.conf.urls.static import static  # this
 
 from rest_framework_simplejwt.views import (  # this one
     TokenObtainPairView,
@@ -24,7 +22,6 @@ urlpatterns = [
     path("category/", views.theCategory, name="category"),
     path("project/", views.theProject, name="project"),
 ]
+
+
 urlpatterns = format_suffix_patterns(urlpatterns)
-
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
