@@ -30,14 +30,19 @@ class About(models.Model):
     service_3_description = models.TextField(null=True)
     service_4_title = models.CharField(max_length=200, null=True)
     service_4_description = models.TextField(null=True)
-    
+
     def __str__(self):
-        return 'About Section Data'
+        return "About Section Data"
 
 
 class Testimonial(models.Model):
+    GENDER = (
+        ("Male", "Male"),
+        ("Female", "Female"),
+    )
     name = models.CharField(max_length=200, null=True)
     message = models.TextField(null=True)
+    gender = models.CharField(max_length=200, null=True, choices=GENDER)
 
     def __str__(self):
         return self.name

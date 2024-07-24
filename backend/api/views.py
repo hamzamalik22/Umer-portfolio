@@ -15,6 +15,7 @@ def getRoutes(request, format=None):
     routes = [
         {"GET, PUT & DELETE": "/api/profile/"},
         {"GET, PUT & DELETE": "/api/about/"},
+        {"GET": "/api/testimonials/"},
         {"POST": "/api/users/token/"},
         {"POST": "/api/users/token/refresh/"},
         {"POST & GET": "/api/agents"},
@@ -59,3 +60,11 @@ def theAbout(request):
     if request.method == "GET":
         serializer = AboutSerializer(about)
         return Response(serializer.data)
+
+
+@api_view(["GET", "POST"])  # HTTP methods
+def theTestimonials(request, format=None):
+    if request.method == "GET":  # Checking method
+        tests = Testimonial.objects.all()  # Getting all the data in variable
+        serializer = TestimonialSerializer(tests, many=True)  # serializing the data
+        return Response({"Testimonials": serializer.data})

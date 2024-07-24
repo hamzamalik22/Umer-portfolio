@@ -14,5 +14,6 @@ urlpatterns = [
     path("", views.getRoutes, name="getRoutes"),
     path("profile/", views.theProfile, name="profile"),
     path("about/", views.theAbout, name="about"),
+    path("testimonials/", views.theTestimonials, name="testimonials"),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -2,10 +2,19 @@ import React, { useEffect } from "react";
 import imgs from "../utils/images";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAbout } from "../store/actions/AboutActions";
+import { fetchTestimonial } from "../store/actions/TestimonialActions";
 
 const About = () => {
   const dispatch = useDispatch();
   const { list, loading, error } = useSelector((state) => state.about);
+  const { testList, testLoading, testError } = useSelector(
+    (state) => state.testimonial
+  );
+
+  useEffect(() => {
+    dispatch(fetchAbout());
+    dispatch(fetchTestimonial());
+  }, [dispatch]);
 
   const {
     para1,
@@ -20,12 +29,13 @@ const About = () => {
     service_4_description,
   } = list;
 
-  useEffect(() => {
-    dispatch(fetchAbout());
-  }, [dispatch]);
+  console.log("hello", testList);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+
+  if (testLoading) return <p>Loading...</p>;
+  if (testError) return <p>Error: {error}</p>;
 
   return (
     <>
@@ -106,129 +116,32 @@ const About = () => {
           <h3 className="h3 testimonials-title">Testimonials</h3>
 
           <ul className="testimonials-list has-scrollbar">
-            <li className="testimonials-item">
-              <div className="content-card" data-testimonials-item>
-                <figure className="testimonials-avatar-box">
-                  <img
-                    src={imgs.avatar_1}
-                    alt=""
-                    width="60"
-                    data-testimonials-avatar
-                  />
-                </figure>
+            {testList.map((item, index) => (
+              <li key={index} className="testimonials-item">
+                <div className="content-card" data-testimonials-item>
+                  <figure className="testimonials-avatar-box">
+                    <img
+                      src={
+                        item.gender === "Male" ? imgs.avatar_1 : imgs.avatar_2
+                      }
+                      alt=""
+                      width="60"
+                    />
+                  </figure>
 
-                <h4
-                  className="h4 testimonials-item-title"
-                  data-testimonials-title
-                >
-                  Daniel lewis
-                </h4>
+                  <h4
+                    className="h4 testimonials-item-title"
+                    data-testimonials-title
+                  >
+                    {item.name}
+                  </h4>
 
-                <div className="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were
-                    very pleased with the work done. She has a lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum
-                    dolor sit amet, ullamcous cididt consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels
-                    dolore magnarels alia.
-                  </p>
+                  <div className="testimonials-text" data-testimonials-text>
+                    <p>{item.message}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-
-            <li className="testimonials-item">
-              <div className="content-card" data-testimonials-item>
-                <figure className="testimonials-avatar-box">
-                  <img
-                    src={imgs.avatar_2}
-                    alt=""
-                    width="60"
-                    data-testimonials-avatar
-                  />
-                </figure>
-
-                <h4
-                  className="h4 testimonials-item-title"
-                  data-testimonials-title
-                >
-                  Jessica miller
-                </h4>
-
-                <div className="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were
-                    very pleased with the work done. She has a lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum
-                    dolor sit amet, ullamcous cididt consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels
-                    dolore magnarels alia.
-                  </p>
-                </div>
-              </div>
-            </li>
-
-            <li className="testimonials-item">
-              <div className="content-card" data-testimonials-item>
-                <figure className="testimonials-avatar-box">
-                  <img
-                    src={imgs.avatar_3}
-                    alt=""
-                    width="60"
-                    data-testimonials-avatar
-                  />
-                </figure>
-
-                <h4
-                  className="h4 testimonials-item-title"
-                  data-testimonials-title
-                >
-                  Emily evans
-                </h4>
-
-                <div className="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were
-                    very pleased with the work done. She has a lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum
-                    dolor sit amet, ullamcous cididt consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels
-                    dolore magnarels alia.
-                  </p>
-                </div>
-              </div>
-            </li>
-
-            <li className="testimonials-item">
-              <div className="content-card" data-testimonials-item>
-                <figure className="testimonials-avatar-box">
-                  <img
-                    src={imgs.avatar_4}
-                    alt=""
-                    width="60"
-                    data-testimonials-avatar
-                  />
-                </figure>
-
-                <h4
-                  className="h4 testimonials-item-title"
-                  data-testimonials-title
-                >
-                  Henry william
-                </h4>
-
-                <div className="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were
-                    very pleased with the work done. She has a lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum
-                    dolor sit amet, ullamcous cididt consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels
-                    dolore magnarels alia.
-                  </p>
-                </div>
-              </div>
-            </li>
+              </li>
+            ))}
           </ul>
         </section>
 
