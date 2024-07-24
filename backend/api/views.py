@@ -21,6 +21,7 @@ def getRoutes(request, format=None):
         {"GET": "/api/skill/"},
         {"GET": "/api/project/"},
         {"GET": "/api/category/"},
+        {"POST": "/api/message/"},
     ]
     return Response({"Routes": routes})
 
@@ -37,7 +38,7 @@ def theProfile(request):
         profile = None
 
     if request.method == "GET":
-        serializer = ProfileSerializer(profile)
+        serializer = ProfileSerializer(profile, context={"request": request})
         return Response(serializer.data)
 
 
@@ -101,5 +102,14 @@ def theCategory(request, format=None):
 def theProject(request, format=None):
     if request.method == "GET":
         project = Project.objects.all()
-        serializer = ProjectSerializer(project, many=True, context={'request': request})
+        serializer = ProjectSerializer(project, many=True, context={"request": request})
         return Response({"Project": serializer.data})
+
+
+@api_view(["POST"])
+def theMessage(request, format=None):
+    if request.method == "POST":
+        serializer = MessageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)

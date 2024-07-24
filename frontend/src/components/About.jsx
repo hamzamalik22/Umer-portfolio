@@ -191,7 +191,7 @@ const About = () => {
 
         {/* client  */}
 
-        <section className="clients">
+        {/* <section className="clients">
           <h3 className="h3 clients-title">Clients</h3>
 
           <ul className="clients-list has-scrollbar">
@@ -231,7 +231,7 @@ const About = () => {
               </a>
             </li>
           </ul>
-        </section>
+        </section> */}
       </article>
     </>
   );

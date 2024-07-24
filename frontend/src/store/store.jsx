@@ -6,6 +6,7 @@ import EducationReducer from "./reducers/EducationSlice";
 import ExperienceReducer from "./reducers/ExperienceSlice";
 import SkillReducer from "./reducers/SkillSlice";
 import ProjectReducer from "./reducers/ProjectSlice";
+import FormReducer from "./reducers/FormSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     experience: ExperienceReducer,
     skill: SkillReducer,
     project: ProjectReducer,
+    contactForm: FormReducer,
   },
 });

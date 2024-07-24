@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class Profile(models.Model):
     name = models.CharField(max_length=200, null=True)
+    profile_picture = models.ImageField(null=True, blank=True, default="by_default.png")
     job_title = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
@@ -104,3 +105,12 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+class Message(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200, null=True)
+    message = models.TextField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.name + ' : ' + str(self.date_created)[0:10]

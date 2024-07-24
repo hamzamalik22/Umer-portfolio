@@ -1,9 +1,40 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { createMessage } from "../store/actions/FormActions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
+
+  const handleForm = async (data) => {
+    try {
+      console.log(data);
+      dispatch(createMessage(data));
+      toast.success("Message Sent");
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <>
+        <ToastContainer
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition:Bounce
+        />
         <article className="contact active">
           <header>
             <h2 className="h2 article-title">Contact</h2>
@@ -25,11 +56,12 @@ const Contact = () => {
           <section className="contact-form">
             <h3 className="h3 form-title">Contact Form</h3>
 
-            <form action="#" className="form" data-form>
+            <form className="form" onSubmit={handleSubmit(handleForm)}>
               <div className="input-wrapper">
                 <input
+                  {...register("name")}
                   type="text"
-                  name="fullname"
+                  name="name"
                   className="form-input"
                   placeholder="Full name"
                   required
@@ -37,6 +69,7 @@ const Contact = () => {
                 />
 
                 <input
+                  {...register("email")}
                   type="email"
                   name="email"
                   className="form-input"
@@ -47,6 +80,7 @@ const Contact = () => {
               </div>
 
               <textarea
+                {...register("message")}
                 name="message"
                 className="form-input"
                 placeholder="Your Message"
@@ -54,7 +88,7 @@ const Contact = () => {
                 data-form-input
               ></textarea>
 
-              <button className="form-btn" type="submit" disabled data-form-btn>
+              <button className="form-btn" type="submit">
                 <ion-icon name="paper-plane"></ion-icon>
                 <span>Send Message</span>
               </button>

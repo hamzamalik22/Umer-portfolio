@@ -21,6 +21,7 @@ urlpatterns = [
     path("skill/", views.theSkill, name="skill"),
     path("category/", views.theCategory, name="category"),
     path("project/", views.theProject, name="project"),
+    path("message/", views.theMessage, name="message"),
 ]
 
 

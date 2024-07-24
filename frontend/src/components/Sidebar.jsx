@@ -11,6 +11,7 @@ const Sidebar = () => {
 
   const {
     name,
+    profile_picture,
     job_title,
     email,
     phone,
@@ -54,8 +55,8 @@ const Sidebar = () => {
   return (
     <aside className="sidebar" data-sidebar ref={sidebarRef}>
       <div className="sidebar-info">
-        <figure className="avatar-box">
-          <img src={imgs.my_avatar} alt="avatar" width="80" />
+        <figure className="avatar-box overflow-hidden">
+          <img src={profile_picture} alt="avatar" width="80" />
         </figure>
 
         <div className="info-content">
