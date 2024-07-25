@@ -41,7 +41,6 @@ const Sidebar = () => {
       sidebarBtn.addEventListener("click", handleToggle);
     }
 
-    // Cleanup the event listener on component unmount
     return () => {
       if (sidebarBtn) {
         sidebarBtn.removeEventListener("click", handleToggle);
