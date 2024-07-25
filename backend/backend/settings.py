@@ -23,15 +23,20 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Path to your Firebase Admin SDK JSON file
-firebase_creds = os.path.join(
-    BASE_DIR, "config", "umer-portfolio-23756-firebase-adminsdk-4owq0-687f5bf218.json"
-)
-cred = credentials.Certificate(firebase_creds)
 
-firebase_admin.initialize_app(
-    cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
-)
+DEFAULT_FILE_STORAGE = 'api.firebase_storage.FirebaseStorage'
+FIREBASE_BUCKET_NAME = "umer-portfolio-23756"
+
+
+# Path to your Firebase Admin SDK JSON file
+# firebase_creds = os.path.join(
+#     BASE_DIR, "config", "umer-portfolio-23756-firebase-adminsdk-4owq0-687f5bf218.json"
+# )
+# cred = credentials.Certificate(firebase_creds)
+
+# firebase_admin.initialize_app(
+#     cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
+# )
 
 
 # firebase_creds = {
