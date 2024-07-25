@@ -29,6 +29,11 @@ firebase_creds = os.path.join(
 )
 cred = credentials.Certificate(firebase_creds)
 
+firebase_admin.initialize_app(
+    cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
+)
+
+
 # firebase_creds = {
 #     "type": os.getenv("FIREBASE_TYPE"),
 #     "project_id": os.getenv("FIREBASE_PROJECT_ID"),
@@ -45,10 +50,6 @@ cred = credentials.Certificate(firebase_creds)
 # cred = credentials.Certificate(firebase_creds)
 
 # print(firebase_creds)
-
-firebase_admin.initialize_app(
-    cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
-)
 
 
 # Quick-start development settings - unsuitable for production

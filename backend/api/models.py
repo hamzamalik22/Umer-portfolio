@@ -107,6 +107,7 @@ class Project(models.Model):
     featured_image = models.ImageField(null=True, blank=True, default="default.jpg")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    featured_image_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.title
