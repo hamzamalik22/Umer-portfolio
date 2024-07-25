@@ -29,14 +29,14 @@ FIREBASE_BUCKET_NAME = "umer-portfolio-23756"
 
 
 # Path to your Firebase Admin SDK JSON file
-# firebase_creds = os.path.join(
-#     BASE_DIR, "config", "umer-portfolio-23756-firebase-adminsdk-4owq0-687f5bf218.json"
-# )
-# cred = credentials.Certificate(firebase_creds)
+firebase_creds = os.path.join(
+    BASE_DIR, "config", "umer-portfolio-23756-firebase-adminsdk-4owq0-687f5bf218.json"
+)
+cred = credentials.Certificate(firebase_creds)
 
-# firebase_admin.initialize_app(
-#     cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
-# )
+firebase_admin.initialize_app(
+    cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
+)
 
 
 # firebase_creds = {
