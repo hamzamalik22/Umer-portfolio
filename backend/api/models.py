@@ -1,15 +1,11 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from api.firebase_storage import FirebaseStorage
-import firebase_admin
-from firebase_admin import storage
-import os
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 class Profile(models.Model):
     name = models.CharField(max_length=200, null=True)
-    profile_picture = models.ImageField(null=True, blank=True, default="by_default.png")
+    profile_picture = CloudinaryField("image")
     job_title = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
@@ -104,20 +100,12 @@ class Category(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=200, null=True)
-    featured_image = models.ImageField(storage=FirebaseStorage(), null=True, blank=True, default="default.jpg")
+    featured_image = CloudinaryField("image")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    featured_image_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.title
-
-
-@receiver(post_save, sender=Project)
-def upload_image_to_firebase(sender, instance, **kwargs):
-    if instance.featured_image and instance.featured_image.name != "default.jpg":
-        instance.featured_image_url = instance.featured_image.url
-        instance.save()
 
 
 class Message(models.Model):

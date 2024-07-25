@@ -15,8 +15,12 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
-import firebase_admin
-from firebase_admin import credentials, storage
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# import firebase_admin
+# from firebase_admin import credentials, storage
 
 load_dotenv()
 
@@ -24,19 +28,19 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-DEFAULT_FILE_STORAGE = 'api.firebase_storage.FirebaseStorage'
-FIREBASE_BUCKET_NAME = "umer-portfolio-23756"
+# DEFAULT_FILE_STORAGE = 'api.firebase_storage.FirebaseStorage'
+# FIREBASE_BUCKET_NAME = "umer-portfolio-23756"
 
 
-# Path to your Firebase Admin SDK JSON file
-firebase_creds = os.path.join(
-    BASE_DIR, "config", "umer-portfolio-23756-firebase-adminsdk-4owq0-687f5bf218.json"
-)
-cred = credentials.Certificate(firebase_creds)
+# # Path to your Firebase Admin SDK JSON file
+# firebase_creds = os.path.join(
+#     BASE_DIR, "config", "umer-portfolio-23756-firebase-adminsdk-4owq0-687f5bf218.json"
+# )
 
-firebase_admin.initialize_app(
-    cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
-)
+# print("Hello" + firebase_creds)
+# cred = credentials.Certificate(firebase_creds)
+
+# print(cred)
 
 
 # firebase_creds = {
@@ -72,7 +76,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -87,6 +90,7 @@ EXTERNAL_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
+    "cloudinary",
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -194,3 +198,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+cloudinary.config(
+    cloud_name = "dut0so6xj",
+    api_key = "954143521361463",
+    api_secret = "s1qz7yTgv5JCibkqnuIe3691hso",
+)

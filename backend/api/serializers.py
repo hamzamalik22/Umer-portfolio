@@ -53,18 +53,18 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    featured_image_url = serializers.URLField(source="featured_image", read_only=True)
+    featured_image = serializers.SerializerMethodField()
     category = CategorySerializer(many=False)
 
     class Meta:
         model = Project
         fields = "__all__"
 
-    # def get_featured_image(self, obj):
-    #     request = self.context.get("request", None)
-    #     if request is not None:
-    #         return request.build_absolute_uri(obj.featured_image.url)
-    #     return obj.featured_image.url
+    def get_featured_image(self, obj):
+        request = self.context.get("request", None)
+        if request is not None:
+            return request.build_absolute_uri(obj.featured_image.url)
+        return obj.featured_image.url
 
 
 class MessageSerializer(serializers.ModelSerializer):
