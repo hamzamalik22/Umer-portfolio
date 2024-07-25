@@ -1,10 +1,10 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from api.firebase_storage import FirebaseStorage
 import firebase_admin
 from firebase_admin import storage
 import os
-
 
 # Create your models here.
 class Profile(models.Model):
@@ -104,7 +104,7 @@ class Category(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=200, null=True)
-    featured_image = models.ImageField(null=True, blank=True, default="default.jpg")
+    featured_image = models.ImageField(storage=FirebaseStorage(), null=True, blank=True, default="default.jpg")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     featured_image_url = models.URLField(null=True, blank=True)
@@ -115,14 +115,9 @@ class Project(models.Model):
 
 @receiver(post_save, sender=Project)
 def upload_image_to_firebase(sender, instance, **kwargs):
-    if instance.featured_image and not instance.featured_image.name == "default.jpg":
-        bucket = storage.bucket()
-        blob = bucket.blob(f"images/{instance.featured_image.name}")
-        blob.upload_from_filename(instance.featured_image.path)
-        blob.make_public()
-        instance.featured_image_url = blob.public_url
+    if instance.featured_image and instance.featured_image.name != "default.jpg":
+        instance.featured_image_url = instance.featured_image.url
         instance.save()
-        os.remove(instance.featured_image.path)
 
 
 class Message(models.Model):
