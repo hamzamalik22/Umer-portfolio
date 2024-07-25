@@ -1,4 +1,9 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import firebase_admin
+from firebase_admin import storage
+import os
 
 
 # Create your models here.
@@ -106,6 +111,19 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+
+@receiver(post_save, sender=Project)
+def upload_image_to_firebase(sender, instance, **kwargs):
+    if instance.featured_image and not instance.featured_image.name == "default.jpg":
+        bucket = storage.bucket()
+        blob = bucket.blob(f"images/{instance.featured_image.name}")
+        blob.upload_from_filename(instance.featured_image.path)
+        blob.make_public()
+        instance.featured_image_url = blob.public_url
+        instance.save()
+        os.remove(instance.featured_image.path)
+
+
 class Message(models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -113,4 +131,4 @@ class Message(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.name + ' : ' + str(self.date_created)[0:10]
+        return self.name + " : " + str(self.date_created)[0:10]

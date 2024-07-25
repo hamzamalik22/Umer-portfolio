@@ -101,8 +101,8 @@ def theCategory(request, format=None):
 @api_view(["GET"])
 def theProject(request, format=None):
     if request.method == "GET":
-        project = Project.objects.all()
-        serializer = ProjectSerializer(project, many=True, context={"request": request})
+        projects = Project.objects.all()
+        serializer = ProjectSerializer(projects, many=True, context={"request": request})
         return Response({"Project": serializer.data})
 
 
