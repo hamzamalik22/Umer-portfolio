@@ -43,6 +43,8 @@ firebase_creds = {
     "universe_domain": os.getenv("FIREBASE_UNIVERSE_DOMAIN"),
 }
 
+# print(firebase_creds)
+
 cred = credentials.Certificate(firebase_creds)
 firebase_admin.initialize_app(
     cred, {"storageBucket": "umer-portfolio-23756.appspot.com"}
