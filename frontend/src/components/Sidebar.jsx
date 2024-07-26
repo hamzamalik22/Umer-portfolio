@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import imgs from "../utils/images";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../store/actions/ProfileActions";
 
@@ -24,8 +23,10 @@ const Sidebar = () => {
   } = list;
 
   useEffect(() => {
-    dispatch(fetchProfile());
-  }, [dispatch]);
+    if (list.length === 0) {
+      dispatch(fetchProfile());
+    }
+  }, [dispatch, list.length]);
 
   const toggleClass = (elem) => {
     elem.classList.toggle("active");
@@ -48,7 +49,7 @@ const Sidebar = () => {
     };
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>..</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (

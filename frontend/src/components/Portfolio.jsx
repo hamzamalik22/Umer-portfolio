@@ -1,17 +1,24 @@
 import React, { useEffect } from "react";
-import imgs from "../utils/images";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProject } from "../store/actions/ProjectActions";
+import Loader from "./Loader";
 
 const Portfolio = () => {
   const dispatch = useDispatch();
   const { list, loading, error } = useSelector((state) => state.project);
 
   useEffect(() => {
-    dispatch(fetchProject());
-  }, [dispatch]);
+    if (list.length === 0) {
+      dispatch(fetchProject());
+    }
+  }, [dispatch, list.length]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <>
+        <Loader />
+      </>
+    );
   if (error) return <p>Error: {error}</p>;
 
   return (

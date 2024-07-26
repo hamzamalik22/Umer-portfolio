@@ -3,6 +3,7 @@ import imgs from "../utils/images";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAbout } from "../store/actions/AboutActions";
 import { fetchTestimonial } from "../store/actions/TestimonialActions";
+import Loader from "./Loader";
 
 const About = () => {
   const dispatch = useDispatch();
@@ -12,9 +13,15 @@ const About = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchAbout());
-    dispatch(fetchTestimonial());
-  }, [dispatch]);
+    if (list.length === 0) {
+      dispatch(fetchAbout());
+    }
+    if (testList.length === 0) {
+      dispatch(fetchTestimonial());
+    }
+    // dispatch(fetchAbout());
+    // dispatch(fetchTestimonial());
+  }, [dispatch, list.length, testList.length]);
 
   const {
     para1,
@@ -31,11 +38,13 @@ const About = () => {
 
   console.log("hello", testList);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  if (testLoading) return <p>Loading...</p>;
-  if (testError) return <p>Error: {testError}</p>;
+  if (loading || testLoading)
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  if (error || testError) return <p>Error: {error || testError}</p>;
 
   return (
     <>
