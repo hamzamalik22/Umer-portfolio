@@ -19,8 +19,6 @@ const About = () => {
     if (testList.length === 0) {
       dispatch(fetchTestimonial());
     }
-    // dispatch(fetchAbout());
-    // dispatch(fetchTestimonial());
   }, [dispatch, list.length, testList.length]);
 
   const {

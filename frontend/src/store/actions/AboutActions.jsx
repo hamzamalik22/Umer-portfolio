@@ -6,7 +6,6 @@ import {
   
   import api from "../../utils/api";
   
-  // Fetch customers
   export const fetchAbout = () => async (dispatch) => {
     try {
       dispatch(getAboutStart());
