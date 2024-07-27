@@ -21,8 +21,8 @@ import cloudinary.api
 
 # import firebase_admin
 # from firebase_admin import credentials, storage
-
 load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -201,7 +201,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 cloudinary.config(
-    cloud_name=str(os.getenv("CLOUDINARY_CLOUD_NAME")),
-    api_key=str(os.getenv("CLOUDINARY_API_KEY")),
-    api_secret=str(os.getenv("CLOUDINARY_API_SECRET")),
+    cloud_name="dvkqrlhsx",
+    api_key="336723647687456",
+    api_secret="KD0NYMwAQYdzRFc2FdTr1s9V0NM",
 )
+
