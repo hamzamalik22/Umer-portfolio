@@ -4,6 +4,7 @@ import { fetchEducation } from "../store/actions/EducationActions";
 import { fetchExperience } from "../store/actions/ExperienceActions";
 import { fetchSkill } from "../store/actions/SkillActions";
 import Loader from "./Loader";
+import TechStack from "./TechStack";
 
 const Resume = () => {
   const dispatch = useDispatch();
@@ -82,6 +83,19 @@ const Resume = () => {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="timeline">
+        <div className="title-wrapper">
+          <div className="icon-box">
+            <ion-icon name="hammer-outline"></ion-icon>
+          </div>
+          <h3 className="h3">Tech Stack</h3>
+        </div>
+
+        <div>
+          <TechStack />
+        </div>
       </section>
 
       <section className="skill">
